@@ -132,7 +132,7 @@
             // 
             this.grpbxSearch.Controls.Add(this.txtbxSearchTerm);
             this.grpbxSearch.Controls.Add(this.btnSearch);
-            this.grpbxSearch.Location = new System.Drawing.Point(740, 39);
+            this.grpbxSearch.Location = new System.Drawing.Point(740, 76);
             this.grpbxSearch.Name = "grpbxSearch";
             this.grpbxSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.grpbxSearch.Size = new System.Drawing.Size(135, 88);
@@ -228,7 +228,7 @@
             // 
             this.grpbxSaveLoad.Controls.Add(this.btnSave);
             this.grpbxSaveLoad.Controls.Add(this.btnLoad);
-            this.grpbxSaveLoad.Location = new System.Drawing.Point(12, 12);
+            this.grpbxSaveLoad.Location = new System.Drawing.Point(3, 12);
             this.grpbxSaveLoad.Name = "grpbxSaveLoad";
             this.grpbxSaveLoad.Size = new System.Drawing.Size(176, 52);
             this.grpbxSaveLoad.TabIndex = 16;
@@ -238,16 +238,16 @@
             // txtbxAverage
             // 
             this.txtbxAverage.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtbxAverage.Location = new System.Drawing.Point(662, 231);
+            this.txtbxAverage.Location = new System.Drawing.Point(717, 236);
             this.txtbxAverage.Name = "txtbxAverage";
             this.txtbxAverage.ReadOnly = true;
-            this.txtbxAverage.Size = new System.Drawing.Size(146, 20);
+            this.txtbxAverage.Size = new System.Drawing.Size(99, 20);
             this.txtbxAverage.TabIndex = 17;
             // 
             // lblAverage
             // 
             this.lblAverage.AutoSize = true;
-            this.lblAverage.Location = new System.Drawing.Point(609, 234);
+            this.lblAverage.Location = new System.Drawing.Point(664, 239);
             this.lblAverage.Name = "lblAverage";
             this.lblAverage.Size = new System.Drawing.Size(47, 13);
             this.lblAverage.TabIndex = 18;
@@ -261,7 +261,7 @@
             this.grpbxLegend.Controls.Add(this.pctbxRed);
             this.grpbxLegend.Controls.Add(this.pctbxGreen);
             this.grpbxLegend.Controls.Add(this.pctbxBlue);
-            this.grpbxLegend.Location = new System.Drawing.Point(611, 271);
+            this.grpbxLegend.Location = new System.Drawing.Point(624, 271);
             this.grpbxLegend.Name = "grpbxLegend";
             this.grpbxLegend.Size = new System.Drawing.Size(225, 167);
             this.grpbxLegend.TabIndex = 19;
@@ -327,15 +327,15 @@
             this.txtbxTitle.Location = new System.Drawing.Point(6, 19);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.ReadOnly = true;
-            this.txtbxTitle.Size = new System.Drawing.Size(162, 20);
+            this.txtbxTitle.Size = new System.Drawing.Size(212, 20);
             this.txtbxTitle.TabIndex = 20;
             // 
             // grpbxTitle
             // 
             this.grpbxTitle.Controls.Add(this.txtbxTitle);
-            this.grpbxTitle.Location = new System.Drawing.Point(209, 12);
+            this.grpbxTitle.Location = new System.Drawing.Point(185, 12);
             this.grpbxTitle.Name = "grpbxTitle";
-            this.grpbxTitle.Size = new System.Drawing.Size(180, 52);
+            this.grpbxTitle.Size = new System.Drawing.Size(224, 52);
             this.grpbxTitle.TabIndex = 21;
             this.grpbxTitle.TabStop = false;
             this.grpbxTitle.Text = "Current Dataset";
