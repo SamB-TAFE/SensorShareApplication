@@ -8,5 +8,17 @@ namespace SensorDataApplication
 {
     internal class DataController
     {
+        private DataProcessor processor;
+        private SensorData currentData;
+
+        public DataController(DataProcessor processor)
+        {
+            processor = processor.getInstance();
+        }
+
+        public SensorData onLoad()
+        {
+
+        }
     }
 }

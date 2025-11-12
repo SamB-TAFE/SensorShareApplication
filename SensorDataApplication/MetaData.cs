@@ -15,5 +15,10 @@ namespace SensorDataApplication
         public string[] row_labels { get; set; }
         public string[] col_labels { get; set; }
 
+        public MetaData()
+        {
+
+        }
     }
+
 }

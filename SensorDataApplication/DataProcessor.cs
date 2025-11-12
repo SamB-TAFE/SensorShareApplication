@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SensorDataApplication
@@ -12,8 +13,13 @@ namespace SensorDataApplication
     internal class DataProcessor
     {
         private DataProcessor instance;
-        private List<SensorData> loadedData;
+        private List<SensorData> loadedData = new List<SensorData>();
         private int currentDatasetIndex;
+
+        public DataProcessor()
+        {
+            instance = getInstance();
+        }
 
         public DataProcessor getInstance()
         {
@@ -27,6 +33,53 @@ namespace SensorDataApplication
                 return instance;
             }
         }
+
+        public SensorData ChangeDataset(int nextOrPrevFlag)
+        {
+            if (nextOrPrevFlag == 1) // Previous
+            {
+                if (currentDatasetIndex == 0)
+                {
+                    return null;
+                }
+                currentDatasetIndex = currentDatasetIndex - 1;
+                return loadedData[currentDatasetIndex];
+            }
+            if (nextOrPrevFlag == 2) // Next
+            {
+                if (currentDatasetIndex + 1 < loadedData.Count())
+                {
+                    currentDatasetIndex = currentDatasetIndex + 1;
+                    return loadedData[currentDatasetIndex];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else // Safety Catch
+            { 
+                return null;
+            }
+        }
+
+        public void saveData(SensorData data, string parentFilePath)
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            };
+
+            string jsonText = JsonSerializer.Serialize(data.metaData, options);
+
+            string filePath = Path.Combine(Path.GetDirectoryName(parentFilePath), data.metaData.file);
+
+            File.WriteAllText(filePath, jsonText);
+
+            saveDataBinary(data, filePath);
+        }
+
 
         public SensorData loadfromMetaData(string filePath)
         {
@@ -66,16 +119,16 @@ namespace SensorDataApplication
 
             SensorData newData = new SensorData(metaData, values);
             newData.setAverage(calculateAverage(newData));
+            newData.setSV(calculateStandardVariance(newData));
+            CheckMetaData(newData);
             loadedData.Add(newData);
             currentDatasetIndex = loadedData.IndexOf(newData);
             return newData;
         }
 
-        public void saveData(SensorData data, string filePath)
+        public void saveDataBinary(SensorData data, string filePath)
         {
             float[,] rawValues = data.getValues();
-            if (data == null || rawValues == null)
-                throw new ArgumentNullException(nameof(data), "SensorData or its values cannot be null.");
 
             using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
             using (BinaryWriter bw = new BinaryWriter(fs))
@@ -87,6 +140,23 @@ namespace SensorDataApplication
                         bw.Write(rawValues[r, c]);
                     }
                 }
+            }
+        }
+
+        private void CheckMetaData(SensorData data)
+        {
+            float[,] values = data.getValues();
+
+            int rows = values.GetLength(0);
+            int cols = values.GetLength(1);
+
+            if (data.metaData.rows != rows)
+            {
+                data.metaData.rows = rows;
+            }
+            if (data.metaData.cols != cols)
+            {
+                data.metaData.cols = cols;
             }
         }
 
@@ -111,10 +181,37 @@ namespace SensorDataApplication
 
             float average = (float)(sum / count);
             return average;
+        }
+
+        private float calculateStandardVariance(SensorData data)
+        {
+            float[,] values = data.getValues();
+            float average = data.getAverage();
+
+            int rows = values.GetLength(0);
+            int cols = values.GetLength(1);
+
+            double squaredDeviationSum = 0;
+            int count = 0;
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    float deviation = values[r, c] - average;
+                    float deviationSquared = deviation * deviation;
+                    squaredDeviationSum += deviationSquared;
+                    count++;
+                }
+            }
+
+            double variance = (squaredDeviationSum / count);
+            float standardVariance = (float)Math.Sqrt(variance);
+            return standardVariance;
 
         }
 
-        public ValueIndex binarySearch(float searchTarget)
+        public ValueIndex binarySearchNearest(float searchTarget)
         {
             SensorData currentDataset = loadedData[currentDatasetIndex];
             float[,] dataSearchField = currentDataset.getValues();
@@ -122,18 +219,30 @@ namespace SensorDataApplication
 
             int low = 0, high = sortedData.Count - 1;
 
+            int bestMatchIndex = -1;
+            float bestMatchVariance = float.MaxValue;
+
             while (low <= high)
             {
-                int mid = low + high / 2;
+                int mid = (low + high) / 2;
                 
                 ValueIndex middleValue = sortedData[mid];
 
+                float currentMatchVariance = middleValue.value - searchTarget;
+
+                //Search for best match if no exact
+                if(currentMatchVariance < bestMatchVariance)
+                {
+                    bestMatchVariance = currentMatchVariance;
+                    bestMatchIndex = mid;
+                }
+
+                //Continue searching for exact match
                 if(middleValue.value == searchTarget)
                 {
                     middleValue.searchVariance = 0;
                     return middleValue;
                 }
-                else if ()
                 else if (middleValue.value < searchTarget)
                 {
                     low = mid + 1;
@@ -144,7 +253,9 @@ namespace SensorDataApplication
                 }
             }
 
-
+            ValueIndex nearestMatch = sortedData[bestMatchIndex];
+            nearestMatch.searchVariance = bestMatchVariance;
+            return nearestMatch;
         }
 
         private List<ValueIndex> buildSortedList(float[,] values)
@@ -164,6 +275,7 @@ namespace SensorDataApplication
             sortedValues.Sort(CompareValues);
             return sortedValues; 
         }
+
         int CompareValues(ValueIndex a, ValueIndex b)
         {
             return a.value.CompareTo(b.value);

@@ -38,11 +38,12 @@
             this.lblLowerBound = new System.Windows.Forms.Label();
             this.grpbxSearch = new System.Windows.Forms.GroupBox();
             this.grpbxBounds = new System.Windows.Forms.GroupBox();
+            this.btnClearBounds = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrev = new System.Windows.Forms.Button();
             this.grpbxDatasetNav = new System.Windows.Forms.GroupBox();
             this.grpbxSaveLoad = new System.Windows.Forms.GroupBox();
             this.txtbxAverage = new System.Windows.Forms.TextBox();
@@ -54,9 +55,8 @@
             this.pctbxRed = new System.Windows.Forms.PictureBox();
             this.pctbxGreen = new System.Windows.Forms.PictureBox();
             this.pctbxBlue = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtbxTitle = new System.Windows.Forms.TextBox();
             this.grpbxTitle = new System.Windows.Forms.GroupBox();
-            this.btnClearBounds = new System.Windows.Forms.Button();
             this.grpbxSearch.SuspendLayout();
             this.grpbxBounds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -101,7 +101,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(29, 45);
+            this.btnSearch.Location = new System.Drawing.Point(30, 45);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
@@ -151,6 +151,15 @@
             this.grpbxBounds.TabIndex = 9;
             this.grpbxBounds.TabStop = false;
             // 
+            // btnClearBounds
+            // 
+            this.btnClearBounds.Location = new System.Drawing.Point(19, 174);
+            this.btnClearBounds.Name = "btnClearBounds";
+            this.btnClearBounds.Size = new System.Drawing.Size(90, 23);
+            this.btnClearBounds.TabIndex = 8;
+            this.btnClearBounds.Text = "Clear Bounds";
+            this.btnClearBounds.UseVisualStyleBackColor = true;
+            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(6, 19);
@@ -178,28 +187,29 @@
             this.dataGridView1.Size = new System.Drawing.Size(578, 368);
             this.dataGridView1.TabIndex = 12;
             // 
-            // button1
+            // btnNext
             // 
-            this.button1.Location = new System.Drawing.Point(87, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Next";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnNext.Location = new System.Drawing.Point(87, 19);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 13;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnPrev
             // 
-            this.button2.Location = new System.Drawing.Point(6, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Previous";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnPrev.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnPrev.Location = new System.Drawing.Point(6, 19);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(75, 23);
+            this.btnPrev.TabIndex = 14;
+            this.btnPrev.Text = "Previous";
+            this.btnPrev.UseVisualStyleBackColor = false;
             // 
             // grpbxDatasetNav
             // 
-            this.grpbxDatasetNav.Controls.Add(this.button2);
-            this.grpbxDatasetNav.Controls.Add(this.button1);
+            this.grpbxDatasetNav.Controls.Add(this.btnPrev);
+            this.grpbxDatasetNav.Controls.Add(this.btnNext);
             this.grpbxDatasetNav.Location = new System.Drawing.Point(415, 9);
             this.grpbxDatasetNav.Name = "grpbxDatasetNav";
             this.grpbxDatasetNav.Size = new System.Drawing.Size(175, 55);
@@ -280,6 +290,7 @@
             // 
             // pctbxRed
             // 
+            this.pctbxRed.BackColor = System.Drawing.Color.DarkSalmon;
             this.pctbxRed.Location = new System.Drawing.Point(17, 111);
             this.pctbxRed.Name = "pctbxRed";
             this.pctbxRed.Size = new System.Drawing.Size(46, 34);
@@ -288,6 +299,7 @@
             // 
             // pctbxGreen
             // 
+            this.pctbxGreen.BackColor = System.Drawing.Color.PaleGreen;
             this.pctbxGreen.Location = new System.Drawing.Point(17, 71);
             this.pctbxGreen.Name = "pctbxGreen";
             this.pctbxGreen.Size = new System.Drawing.Size(46, 34);
@@ -296,38 +308,30 @@
             // 
             // pctbxBlue
             // 
+            this.pctbxBlue.BackColor = System.Drawing.Color.SkyBlue;
             this.pctbxBlue.Location = new System.Drawing.Point(17, 31);
             this.pctbxBlue.Name = "pctbxBlue";
             this.pctbxBlue.Size = new System.Drawing.Size(46, 34);
             this.pctbxBlue.TabIndex = 0;
             this.pctbxBlue.TabStop = false;
             // 
-            // textBox1
+            // txtbxTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(162, 20);
-            this.textBox1.TabIndex = 20;
+            this.txtbxTitle.Location = new System.Drawing.Point(6, 19);
+            this.txtbxTitle.Name = "txtbxTitle";
+            this.txtbxTitle.ReadOnly = true;
+            this.txtbxTitle.Size = new System.Drawing.Size(162, 20);
+            this.txtbxTitle.TabIndex = 20;
             // 
             // grpbxTitle
             // 
-            this.grpbxTitle.Controls.Add(this.textBox1);
+            this.grpbxTitle.Controls.Add(this.txtbxTitle);
             this.grpbxTitle.Location = new System.Drawing.Point(209, 12);
             this.grpbxTitle.Name = "grpbxTitle";
             this.grpbxTitle.Size = new System.Drawing.Size(180, 52);
             this.grpbxTitle.TabIndex = 21;
             this.grpbxTitle.TabStop = false;
             this.grpbxTitle.Text = "Current Dataset";
-            // 
-            // btnClearBounds
-            // 
-            this.btnClearBounds.Location = new System.Drawing.Point(19, 174);
-            this.btnClearBounds.Name = "btnClearBounds";
-            this.btnClearBounds.Size = new System.Drawing.Size(90, 23);
-            this.btnClearBounds.TabIndex = 8;
-            this.btnClearBounds.Text = "Clear Bounds";
-            this.btnClearBounds.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -378,8 +382,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.GroupBox grpbxDatasetNav;
         private System.Windows.Forms.GroupBox grpbxSaveLoad;
         private System.Windows.Forms.TextBox txtbxAverage;
@@ -391,7 +395,7 @@
         private System.Windows.Forms.PictureBox pctbxBlue;
         private System.Windows.Forms.Label lblRed;
         private System.Windows.Forms.Label lblGreen;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtbxTitle;
         private System.Windows.Forms.GroupBox grpbxTitle;
         private System.Windows.Forms.Button btnClearBounds;
     }

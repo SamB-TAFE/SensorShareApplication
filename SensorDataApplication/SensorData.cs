@@ -12,6 +12,7 @@ namespace SensorDataApplication
         public MetaData metaData;
         private float[,] values;
         private float average;
+        private float standardVariance;
 
         public SensorData(MetaData meta, float[,] extractedValues)
         {
@@ -33,6 +34,16 @@ namespace SensorDataApplication
         public float getAverage()
         {
             return average;
+        }
+
+        public void setSV(float standardVariance)
+        {
+            this.standardVariance = standardVariance;
+        }
+
+        public float getSV()
+        {
+            return standardVariance;
         }
     }
 }

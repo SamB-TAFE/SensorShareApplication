@@ -15,11 +15,32 @@ namespace SensorDataApplication
         public MainForm()
         {
             InitializeComponent();
+            InitialiseClasses();
+
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+        }
 
+        public void InitialiseClasses()
+        {
+            DataView uiControls = new DataView(
+                dataGridView1,
+                txtbxTitle,
+                txtbxAverage,
+                txtbxUpperBound,
+                txtbxLowerBound,
+                txtbxSearchTerm,
+                btnPrev,
+                btnNext,
+                btnSearch,
+                btnClearBounds,
+                btnSetBounds
+                );
+            DataProcessor dataProcessor = new DataProcessor();
+            DataController controller = new DataController(dataProcessor);
         }
     }
 }
