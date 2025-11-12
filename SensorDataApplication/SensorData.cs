@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SensorDataApplication
 {
-    internal class SensorData
+    public class SensorData
     {
         public MetaData metaData;
         private float[,] values;

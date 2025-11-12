@@ -29,3 +29,12 @@ C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\obj\Debu
 C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\obj\Debug\SensorDa.B5DD3AD9.Up2Date
 C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\obj\Debug\SensorDataApplication.exe
 C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\obj\Debug\SensorDataApplication.pdb
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\air_quality.bin
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\air_quality.meta.json
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\energy_use.bin
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\energy_use.meta.json
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\greenhouse_temp.bin
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\greenhouse_temp.meta.json
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\wildlife_detection.bin
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\bin\Debug\data\wildlife_detection.meta.json
+C:\Users\samue\source\repos\SensorDataApplication\SensorDataApplication\obj\Debug\SensorDataApplication.exe.config

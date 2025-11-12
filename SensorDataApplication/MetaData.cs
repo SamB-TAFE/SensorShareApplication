@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorDataApplication
 {
-    internal class MetaData
+    public class MetaData
     {
         public string file { get; set; }
         public string dataset_label { get; set; }
@@ -15,10 +15,6 @@ namespace SensorDataApplication
         public string[] row_labels { get; set; }
         public string[] col_labels { get; set; }
 
-        public MetaData()
-        {
-
-        }
     }
 
 }

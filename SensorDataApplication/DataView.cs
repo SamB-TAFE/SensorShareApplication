@@ -20,6 +20,7 @@ namespace SensorDataApplication
         private Button searchButton;
         private Button clearBoundsButton;
         private Button setBoundsButton;
+        private Button saveButton;
 
 
         public DataView(
@@ -33,7 +34,8 @@ namespace SensorDataApplication
             Button datasetNext,
             Button search,
             Button clearBounds,
-            Button setBounds
+            Button setBounds,
+            Button save
             )
         {
             this.dataGrid = dataGrid;
@@ -47,6 +49,7 @@ namespace SensorDataApplication
             this.searchButton = search;
             this.clearBoundsButton = clearBounds;
             this.setBoundsButton = setBounds;
+            this.saveButton = save;
         }
 
         public void DisableButtonsWithoutData()
@@ -56,15 +59,15 @@ namespace SensorDataApplication
             DisableButton(searchButton);
             DisableButton(clearBoundsButton);
             DisableButton(setBoundsButton);
+            DisableButton(saveButton);
         }
 
         public void EnableButtonsUponDataLoad()
         {
-            EnableButton(datasetPrev);
-            EnableButton(datasetNext);
             EnableButton(searchButton);
             EnableButton(clearBoundsButton);
             EnableButton(setBoundsButton);
+            EnableButton(saveButton);
         }
 
         public void ClearBounds()
@@ -117,11 +120,6 @@ namespace SensorDataApplication
                                 cell.Style.BackColor = Color.PaleGreen;  // within range
                             }
                         }
-                        else
-                        {
-                            // Not numeric (could be text header column)
-                            cell.Style.BackColor = Color.White;
-                        }
                     }
                 }
             }
@@ -140,7 +138,7 @@ namespace SensorDataApplication
             if (!ParseBoundInput(upperBoundText, "Upper Boundary", out upperBound)) return false;
             if (!ParseBoundInput(lowerBoundText, "Lower Boundary", out lowerBound)) return false;
 
-            if (upperBound == 0 && lowerBound == 0) // Set Bounds on empty inputs
+            if (float.IsNaN(upperBound) && float.IsNaN(lowerBound)) // Set Bounds on empty inputs
             {
                 (upperBound, lowerBound) = SetDefaultBounds(data);
                 upperBoundInput.Text = $"{upperBound} (Standard Var)";
@@ -185,12 +183,12 @@ namespace SensorDataApplication
             // Blank/whitespace means "missing" (will be set to default)
             if (string.IsNullOrWhiteSpace(text))
             {
-                parsed = float.NaN;
+                parsed = float.NaN; // Alows for 0 to be searched
                 return true;     
             }
 
             // Try to parse a non-blank entry
-            if (!float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out parsed))
+            if (!float.TryParse(text, out parsed))
             {
                 MessageBox.Show($"Please enter a valid number. ({fieldTitle})");
                 return false;
@@ -199,9 +197,10 @@ namespace SensorDataApplication
             return true;
         }
 
-        public bool ParseSearchInput(string text, string textboxTitle, out float parsed)
+        public bool ParseSearchInput(string textboxTitle, out float parsed)
         {
-            if (!string.IsNullOrWhiteSpace(text) || !float.TryParse(text, out parsed))
+            string text = searchInput.Text;
+            if (string.IsNullOrWhiteSpace(text) || !float.TryParse(text, out parsed))
             {
                 MessageBox.Show($"Please enter a valid input. ({textboxTitle})");
                 parsed = 0;
@@ -246,11 +245,11 @@ namespace SensorDataApplication
             Color darken = Color.Silver;
             butt.BackColor = darken;
         }
-
         
         public void LoadMetadata(SensorData data)
         {
             string title = data.metaData.dataset_label;
+            double readableAvg = Math.Round(data.getAverage(), 3);
             string average = data.getAverage().ToString();
             titleDisplay.Text = title;
             avgDisplay.Text = average;
@@ -267,7 +266,7 @@ namespace SensorDataApplication
 
             string[] rowHeaders = (meta.row_labels ?? Array.Empty<string>());
             if (rowHeaders.Length != rows)
-                rowHeaders = Enumerable.Range(0, rows).Select(i => $"Row {i}").ToArray();
+                rowHeaders = Enumerable.Range(0, rows).Select(i => $"").ToArray();
 
             string[] colHeaders = (meta.col_labels ?? Array.Empty<string>());
             if (colHeaders.Length != cols)
@@ -286,7 +285,8 @@ namespace SensorDataApplication
                 for (int c = 0; c < cols; c++)
                 {
                     float v = values[r, c];
-                    row[c + 1] = v;
+                    double readableVal = Math.Round(v, 3);
+                    row[c + 1] = readableVal;
                 }
 
                 table.Rows.Add(row);
@@ -304,6 +304,16 @@ namespace SensorDataApplication
             dataGrid.RowHeadersVisible = false;
         }
 
+        public void SelectCell(int row, int col)
+        {
+            // loaded dataset adds a row header column
+            int displayCol = col + 1;
 
+            dataGrid.ClearSelection();
+            dataGrid.Rows[row].Cells[displayCol].Selected = true;
+
+            dataGrid.CurrentCell = dataGrid.Rows[row].Cells[displayCol];
+            dataGrid.Focus();
+        }
     }
 }

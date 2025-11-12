@@ -98,6 +98,7 @@
             this.btnSetBounds.TabIndex = 4;
             this.btnSetBounds.Text = "Set Bounds";
             this.btnSetBounds.UseVisualStyleBackColor = true;
+            this.btnSetBounds.Click += new System.EventHandler(this.btnSetBounds_Click);
             // 
             // btnSearch
             // 
@@ -107,6 +108,7 @@
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblUpperBound
             // 
@@ -153,12 +155,13 @@
             // 
             // btnClearBounds
             // 
-            this.btnClearBounds.Location = new System.Drawing.Point(19, 174);
+            this.btnClearBounds.Location = new System.Drawing.Point(19, 158);
             this.btnClearBounds.Name = "btnClearBounds";
             this.btnClearBounds.Size = new System.Drawing.Size(90, 23);
             this.btnClearBounds.TabIndex = 8;
             this.btnClearBounds.Text = "Clear Bounds";
             this.btnClearBounds.UseVisualStyleBackColor = true;
+            this.btnClearBounds.Click += new System.EventHandler(this.btnClearBounds_Click);
             // 
             // btnSave
             // 
@@ -168,6 +171,7 @@
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnLoad
             // 
@@ -181,6 +185,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 70);
             this.dataGridView1.Name = "dataGridView1";
@@ -195,6 +200,7 @@
             this.btnNext.TabIndex = 13;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -205,6 +211,7 @@
             this.btnPrev.TabIndex = 14;
             this.btnPrev.Text = "Previous";
             this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // grpbxDatasetNav
             // 

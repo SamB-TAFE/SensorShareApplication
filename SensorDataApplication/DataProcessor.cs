@@ -12,28 +12,38 @@ namespace SensorDataApplication
 
     internal class DataProcessor
     {
-        private DataProcessor instance;
-        private List<SensorData> loadedData = new List<SensorData>();
+        private static DataProcessor instance;
+        private List<SensorData> loadedData;
         private int currentDatasetIndex;
 
-        public DataProcessor()
+        private DataProcessor()
         {
-            instance = getInstance();
+            loadedData = new List<SensorData>();
+            currentDatasetIndex = 0;
         }
 
-        public DataProcessor getInstance()
+        public static DataProcessor getInstance()
         {
             if (instance == null)
             {
                 instance = new DataProcessor();
-                return instance;
             }
-            else
-            {
-                return instance;
-            }
+            return instance;
         }
 
+        public int GetCurrentIndex()
+        {
+            return currentDatasetIndex;
+        }
+        public int GetLoadedCount()
+        {
+            return loadedData.Count;
+        }
+
+        public SensorData GetCurrent()
+        {
+            return loadedData[currentDatasetIndex];
+        }
         public SensorData ChangeDataset(int nextOrPrevFlag)
         {
             if (nextOrPrevFlag == 1) // Previous
@@ -63,8 +73,13 @@ namespace SensorDataApplication
             }
         }
 
-        public void saveData(SensorData data, string parentFilePath)
+        public void saveData(SensorData data, string metaFilePath)
         {
+            string metaBase = Path.GetFileNameWithoutExtension(metaFilePath);
+            string binName = metaBase + ".bin";
+
+            data.metaData.file = binName;
+
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
@@ -72,12 +87,12 @@ namespace SensorDataApplication
             };
 
             string jsonText = JsonSerializer.Serialize(data.metaData, options);
+            File.WriteAllText(metaFilePath, jsonText);
+          
 
-            string filePath = Path.Combine(Path.GetDirectoryName(parentFilePath), data.metaData.file);
+            string binaryFilePath = Path.Combine(Path.GetDirectoryName(metaFilePath), data.metaData.file);
 
-            File.WriteAllText(filePath, jsonText);
-
-            saveDataBinary(data, filePath);
+            saveDataBinary(data, binaryFilePath);
         }
 
 
@@ -228,7 +243,7 @@ namespace SensorDataApplication
                 
                 ValueIndex middleValue = sortedData[mid];
 
-                float currentMatchVariance = middleValue.value - searchTarget;
+                float currentMatchVariance = Math.Abs(middleValue.value - searchTarget); // Math.Abs ensures no negative values
 
                 //Search for best match if no exact
                 if(currentMatchVariance < bestMatchVariance)
@@ -252,7 +267,10 @@ namespace SensorDataApplication
                     high = mid - 1;
                 }
             }
-
+            if (bestMatchIndex < 0)
+            {
+                return null;
+            }
             ValueIndex nearestMatch = sortedData[bestMatchIndex];
             nearestMatch.searchVariance = bestMatchVariance;
             return nearestMatch;

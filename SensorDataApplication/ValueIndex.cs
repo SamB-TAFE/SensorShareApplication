@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorDataApplication
 {
-    internal class ValueIndex
+    public class ValueIndex
     {
         public float value;
         public int row;
