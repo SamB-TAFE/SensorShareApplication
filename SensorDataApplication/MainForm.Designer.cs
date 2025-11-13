@@ -92,22 +92,24 @@
             // 
             // btnSetBounds
             // 
+            this.btnSetBounds.BackColor = System.Drawing.Color.Gainsboro;
             this.btnSetBounds.Location = new System.Drawing.Point(25, 118);
             this.btnSetBounds.Name = "btnSetBounds";
             this.btnSetBounds.Size = new System.Drawing.Size(75, 23);
             this.btnSetBounds.TabIndex = 4;
             this.btnSetBounds.Text = "Set Bounds";
-            this.btnSetBounds.UseVisualStyleBackColor = true;
+            this.btnSetBounds.UseVisualStyleBackColor = false;
             this.btnSetBounds.Click += new System.EventHandler(this.btnSetBounds_Click);
             // 
             // btnSearch
             // 
+            this.btnSearch.BackColor = System.Drawing.Color.Gainsboro;
             this.btnSearch.Location = new System.Drawing.Point(30, 45);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblUpperBound
@@ -155,32 +157,35 @@
             // 
             // btnClearBounds
             // 
+            this.btnClearBounds.BackColor = System.Drawing.Color.Gainsboro;
             this.btnClearBounds.Location = new System.Drawing.Point(19, 158);
             this.btnClearBounds.Name = "btnClearBounds";
             this.btnClearBounds.Size = new System.Drawing.Size(90, 23);
             this.btnClearBounds.TabIndex = 8;
             this.btnClearBounds.Text = "Clear Bounds";
-            this.btnClearBounds.UseVisualStyleBackColor = true;
+            this.btnClearBounds.UseVisualStyleBackColor = false;
             this.btnClearBounds.Click += new System.EventHandler(this.btnClearBounds_Click);
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.Gainsboro;
             this.btnSave.Location = new System.Drawing.Point(6, 19);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnLoad
             // 
+            this.btnLoad.BackColor = System.Drawing.Color.Gainsboro;
             this.btnLoad.Location = new System.Drawing.Point(87, 19);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 11;
             this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // dataGridView1
@@ -194,12 +199,13 @@
             // 
             // btnNext
             // 
+            this.btnNext.BackColor = System.Drawing.Color.Gainsboro;
             this.btnNext.Location = new System.Drawing.Point(87, 19);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 13;
             this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev

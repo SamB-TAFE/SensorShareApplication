@@ -15,7 +15,7 @@
     "Sector 9",
     "Sector 10"
   ],
-  "column_labels": [
+  "col_labels": [
     "Camera 1",
     "Camera 2",
     "Camera 3",
@@ -26,5 +26,5 @@
     "Camera 8",
     "Camera 9",
     "Camera 10"
-  ],
+  ]
 }

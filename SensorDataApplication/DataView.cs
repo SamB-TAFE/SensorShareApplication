@@ -262,15 +262,8 @@ namespace SensorDataApplication
 
             int rows = meta.rows;
             int cols = meta.cols;
-
-
-            string[] rowHeaders = (meta.row_labels ?? Array.Empty<string>());
-            if (rowHeaders.Length != rows)
-                rowHeaders = Enumerable.Range(0, rows).Select(i => $"").ToArray();
-
-            string[] colHeaders = (meta.col_labels ?? Array.Empty<string>());
-            if (colHeaders.Length != cols)
-                colHeaders = Enumerable.Range(0, cols).Select(j => $"Col {j}").ToArray();
+            string[] rowHeaders = meta.row_labels;
+            string[] colHeaders = meta.col_labels;
 
             DataTable table = new DataTable();
             table.Columns.Add("Row Headers", typeof(string));

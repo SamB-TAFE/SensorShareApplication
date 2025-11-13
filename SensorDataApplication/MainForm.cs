@@ -122,9 +122,11 @@ namespace SensorDataApplication
             {
                 (ValueIndex result,string message) = controller.SearchNearest(parsed);
                 MessageBox.Show(message);
-                uiControls.SelectCell(result.row, result.col);
+                if (result != null)
+                {
+                    uiControls.SelectCell(result.row, result.col);
+                }
             }
-            
         }
     }
 }

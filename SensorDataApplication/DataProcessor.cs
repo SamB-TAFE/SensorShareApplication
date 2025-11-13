@@ -14,9 +14,9 @@ namespace SensorDataApplication
     {
         private static DataProcessor instance;
         private List<SensorData> loadedData;
-        private int currentDatasetIndex;
+        protected int currentDatasetIndex;
 
-        private DataProcessor()
+        protected DataProcessor()
         {
             loadedData = new List<SensorData>();
             currentDatasetIndex = 0;
@@ -111,7 +111,7 @@ namespace SensorDataApplication
             return newData;
         }
 
-        private SensorData loadBinary(MetaData metaData, string parentFilePath)
+        protected SensorData loadBinary(MetaData metaData, string parentFilePath)
         {
             string binaryPath = Path.Combine(Path.GetDirectoryName(parentFilePath), metaData.file);
 
@@ -158,7 +158,7 @@ namespace SensorDataApplication
             }
         }
 
-        private void CheckMetaData(SensorData data)
+        protected void CheckMetaData(SensorData data)
         {
             float[,] values = data.getValues();
 
@@ -173,9 +173,32 @@ namespace SensorDataApplication
             {
                 data.metaData.cols = cols;
             }
+
+
+            // if there is a mismatch create empty string array of appropriate length.
+
+            string[] rowHeaders = data.metaData.row_labels;
+            if (rowHeaders.Length != rows)
+            {
+                rowHeaders = new string[rows];
+                for (int i = 0; i < rows; i++)
+                {
+                    rowHeaders[i] = "";
+                }
+            }
+
+            string[] colHeaders = data.metaData.col_labels;
+            if (colHeaders.Length != cols)
+            {
+                colHeaders = new string[cols];
+                for (int i = 0; i < cols; i++)
+                {
+                    colHeaders[i] = "";
+                }
+            }
         }
 
-        private float calculateAverage(SensorData data)
+        protected float calculateAverage(SensorData data)
         {
             float[,] values = data.getValues();
 
@@ -198,7 +221,7 @@ namespace SensorDataApplication
             return average;
         }
 
-        private float calculateStandardVariance(SensorData data)
+        protected float calculateStandardVariance(SensorData data)
         {
             float[,] values = data.getValues();
             float average = data.getAverage();
@@ -276,7 +299,7 @@ namespace SensorDataApplication
             return nearestMatch;
         }
 
-        private List<ValueIndex> buildSortedList(float[,] values)
+        protected List<ValueIndex> buildSortedList(float[,] values)
         {
             int rows = values.GetLength (0);
             int cols = values.GetLength (1);
